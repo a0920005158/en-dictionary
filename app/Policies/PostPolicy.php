@@ -10,9 +10,10 @@ class PostPolicy
 {
     use HandlesAuthorization;
 
-    public function create()
+    public function create(Post $post)
     {
-        echo '------------';
+        $id = $post->id;
+        echo '------'.$id.'------';
         return true;
     }
 }

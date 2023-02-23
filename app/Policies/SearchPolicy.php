@@ -3,7 +3,6 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\Post;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class SearchPolicy
@@ -12,6 +11,10 @@ class SearchPolicy
 
     public function __construct()
     {
+    }
+
+    public function searchAuth(){
+
     }
 
     public function create()

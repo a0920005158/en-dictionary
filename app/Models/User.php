@@ -22,6 +22,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'identity',
+        'is_lock'
     ];
 
     /**
@@ -43,10 +45,36 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function search(){
-        if($this->cant('create',$this)){
+    public $userId = "-1";
+    public $userData;
+
+    function __construct(){
+    }
+
+    public function chgPassWord(string $password)
+    {
+        $this->userData = User::findByMid(1);
+        if ($this->cant('isLock', $this)) {
+            if ($this->userData->password != $password) {
+                $this->userData->password = $password;
+                $this->userData->save();
+            }
+        } else {
+            return [];
+        }
+    }
+
+    public static function findByMid($mid)
+    {
+        return User::where("id", "=", $mid)->get()->first();
+    }
+
+    public function search()
+    {
+        $auth = $this->cant('create', $this);
+        if ($this->cant('userIdentity', $this)) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

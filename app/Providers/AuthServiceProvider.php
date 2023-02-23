@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Post;
 use App\Policies\SearchPolicy;
 use App\Policies\PostPolicy;
+use App\Policies\UserPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -22,6 +23,7 @@ class AuthServiceProvider extends ServiceProvider
         // 'App\Models\User' => 'App\Policies\searchPolicy',
         User::class => SearchPolicy::class,
         Post::class => PostPolicy::class,
+        User::class => UserPolicy::class
     ];
 
     /**

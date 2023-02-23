@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SearchWordController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,4 +22,4 @@ use App\Http\Controllers\SearchWordController;
 
 Route::middleware('auth:api-user')->get('/search-word',[SearchWordController::class,'searchWord']);
 
-// Route::middleware('auth:api-user')->post('/search-word',[SearchWordController::class,'searchWord']);
+Route::get('/login',[LoginController::class,'AuthIdentity']);
