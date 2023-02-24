@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\WordDictionary;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\BaseController;
 
-class SearchWordController extends Controller
+class SearchWordController extends BaseController
 {
     /**
      * Handle the incoming request.
@@ -28,8 +28,10 @@ class SearchWordController extends Controller
 
         $existWordData = WordDictionary::searchWord($searchEn);
         if ($existWordData != null) {
-        }else{
-
+        } else {
+            $test = $this->generateSituation(["author", "exclusive", "motion"], 200);
+            // $test2 = $this->generateAIImg($searchEn, 1, "1024x1024");
+            return response()->json($test);
         }
     }
 }

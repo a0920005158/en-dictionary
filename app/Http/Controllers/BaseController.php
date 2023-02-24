@@ -22,4 +22,97 @@ class BaseController extends Controller
         curl_close($ch);
         return $body;
     }
+
+    public $API_KEY = "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";
+
+    public function getOpenAIModel()
+    {
+        $url = "https://api.openai.com/v1/models";
+        $curl_h = curl_init($url);
+
+        curl_setopt(
+            $curl_h,
+            CURLOPT_HTTPHEADER,
+            array(
+                'Authorization: Bearer ' . $this->API_KEY
+            )
+        );
+        curl_setopt($curl_h, CURLOPT_RETURNTRANSFER, true);
+
+        $re = curl_exec($curl_h);
+
+        return json_decode($re, true);
+    }
+
+    public function generateAIImg($text, $count, $size)
+    {
+        $url = "https://api.openai.com/v1/images/generations";
+        $curl_h = curl_init($url);
+        $arr = array();
+        $arr["prompt"] = $text;
+        $arr["n"] =  $count;
+        $arr["size"] =  $size;
+        $jsonData = json_encode($arr);
+
+        curl_setopt(
+            $curl_h,
+            CURLOPT_HTTPHEADER,
+            array(
+                'Content-Type: application/json',
+                'Authorization: Bearer ' . $this->API_KEY
+            )
+        );
+        curl_setopt($curl_h, CURLOPT_POSTFIELDS, $jsonData);
+        curl_setopt($curl_h, CURLOPT_RETURNTRANSFER, true);
+
+        $re = curl_exec($curl_h);
+
+        return json_decode($re, true);
+    }
+
+    public function generateSituation(array $wordArr, int $count)
+    {
+        $result = array();
+        foreach ($wordArr as $key => $value) {
+            if ($value) {
+            } else {
+                array_splice($wordArr, $key);
+            }
+        }
+        $txt = "請用" . implode("、", $wordArr) . "這些單字產生總字數" . $count . "內能用圖片敘述的情境，每段對應的圖片內容分段顯示，並且使用到的單字用中括號標記";
+        if (count($wordArr) > 0) {
+            $result = $this->chatGpt($txt);
+        } else {
+        }
+        return $result;
+    }
+
+    public function chatGpt($word)
+    {
+        $url = "https://api.openai.com/v1/completions";
+        $curl_h = curl_init($url);
+
+        $arr = array(
+            "model" => "text-davinci-003",
+            "prompt" => $word,
+            "temperature" => 0,
+            "max_tokens" => strlen($word)
+        );
+        $jsonData = json_encode($arr);
+
+        curl_setopt(
+            $curl_h,
+            CURLOPT_HTTPHEADER,
+            array(
+                'Content-Type: application/json',
+                'Authorization: Bearer ' . $this->API_KEY
+            )
+        );
+        curl_setopt($curl_h, CURLOPT_POSTFIELDS, $jsonData);
+        curl_setopt($curl_h, CURLOPT_RETURNTRANSFER, true);
+
+        $re = curl_exec($curl_h);
+
+        return json_decode($re, true);
+    }
 }
