@@ -29,7 +29,8 @@ class SearchWordController extends BaseController
         $existWordData = WordDictionary::searchWord($searchEn);
         if ($existWordData != null) {
         } else {
-            $test = $this->generateSituation(["author", "exclusive", "motion"], 200);
+            $test = $this->chatGpt($searchEn);
+            // $test = $this->generateSituation(["author", "exclusive", "motion"], 200);
             // $test2 = $this->generateAIImg($searchEn, 1, "1024x1024");
             return response()->json($test);
         }

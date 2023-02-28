@@ -23,7 +23,7 @@ class BaseController extends Controller
         return $body;
     }
 
-    public $API_KEY = "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";
+    public $API_KEY = "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";
 
     public function getOpenAIModel()
     {
@@ -87,16 +87,22 @@ class BaseController extends Controller
         return $result;
     }
 
-    public function chatGpt($word)
+    public function chatGpt($word,$situation)
     {
         $url = "https://api.openai.com/v1/completions";
         $curl_h = curl_init($url);
 
         $arr = array(
             "model" => "text-davinci-003",
-            "prompt" => $word,
-            "temperature" => 0,
-            "max_tokens" => strlen($word)
+            // "prompt" => $word,
+            "prompt" => "The following is a conversation with an AI assistant.".$word."\nAI:",
+            "temperature" => 0.5,
+            // "max_tokens" => strlen($word)
+            "max_tokens" => 60,
+            "top_p" => 1.0,
+            "frequency_penalty" => 0.5,
+            "presence_penalty" => 0.0,
+            "stop" => ["You:"]
         );
         $jsonData = json_encode($arr);
 
