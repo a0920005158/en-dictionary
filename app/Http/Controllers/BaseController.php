@@ -87,7 +87,7 @@ class BaseController extends Controller
         return $result;
     }
 
-    public function chatGpt($word,$situation)
+    public function chatGpt($word)
     {
         $url = "https://api.openai.com/v1/completions";
         $curl_h = curl_init($url);

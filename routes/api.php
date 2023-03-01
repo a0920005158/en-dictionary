@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SearchWordController;
+use App\Http\Controllers\AIConversationController;
 use App\Http\Controllers\LoginController;
 
 /*
@@ -20,6 +21,9 @@ use App\Http\Controllers\LoginController;
 //     return $request->user();
 // });
 
-Route::middleware('auth:api-user')->get('/search-word',[SearchWordController::class,'searchWord']);
+// Route::middleware('auth:api-user')->get('/search-word', [SearchWordController::class, 'searchWord']);
+// Route::middleware('auth:api-user')->get('/ai-coversation', [AIConversationController::class, 'sendMsg']);
 
-Route::get('/login',[LoginController::class,'AuthIdentity']);
+Route::match(['get', 'post'], '/search-word', [SearchWordController::class, 'searchWord']);
+Route::match(['get', 'post'], '/ai-coversation', [AIConversationController::class, 'sendMsg']);
+Route::get('/login', [LoginController::class, 'AuthIdentity']);
