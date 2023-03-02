@@ -19,11 +19,12 @@ class AIConversationController extends BaseController
 
     public function sendMsg(Request $request)
     {
+        $sendMsg = $request->input("msg");
         $this->validate($request, [
             'msg' => 'required|max:255'
         ]);
 
-        $sendMsg = $request->input("msg");
+
 
         $result = $this->chatGpt($sendMsg);
         return response()->json($result);

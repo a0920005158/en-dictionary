@@ -95,14 +95,14 @@ class BaseController extends Controller
         $arr = array(
             "model" => "text-davinci-003",
             // "prompt" => $word,
-            "prompt" => "The following is a conversation with an AI assistant.".$word."\nAI:",
+            "prompt" => "The following is a conversation with an AI assistant." . $word . "\nAI:",
             "temperature" => 0.5,
             // "max_tokens" => strlen($word)
             "max_tokens" => 60,
             "top_p" => 1.0,
             "frequency_penalty" => 0.5,
             "presence_penalty" => 0.0,
-            "stop" => ["You:"]
+            "stop" => [" Human:", " AI:"]
         );
         $jsonData = json_encode($arr);
 

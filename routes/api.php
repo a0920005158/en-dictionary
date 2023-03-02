@@ -25,5 +25,6 @@ use App\Http\Controllers\LoginController;
 // Route::middleware('auth:api-user')->get('/ai-coversation', [AIConversationController::class, 'sendMsg']);
 
 Route::match(['get', 'post'], '/search-word', [SearchWordController::class, 'searchWord']);
-Route::match(['get', 'post'], '/ai-coversation', [AIConversationController::class, 'sendMsg']);
+Route::match(['get', 'post'], '/ai-conversation', [AIConversationController::class, 'sendMsg']);
+// Route::post( '/ai-conversation', [AIConversationController::class, 'sendMsg']);
 Route::get('/login', [LoginController::class, 'AuthIdentity']);
