@@ -18,6 +18,9 @@ class SearchWordController extends BaseController
     {
     }
 
+    private $url = "https://api.wordnik.com/v4/word.json/";
+    private $Wordnik_API_Key = "nxf8br2c6444ehxws2yz63o7tv2l6hiptwa1rjs6wonhizkqg";
+
     public function searchWord(Request $request)
     {
         $this->validate($request, [
@@ -28,11 +31,19 @@ class SearchWordController extends BaseController
 
         $existWordData = WordDictionary::searchWord($searchEn);
         if ($existWordData != null) {
+            return response()->json();
         } else {
-            $test = $this->chatGpt($searchEn);
+            // $test = $this->chatGpt($searchEn);
             // $test = $this->generateSituation(["author", "exclusive", "motion"], 200);
             // $test2 = $this->generateAIImg($searchEn, 1, "1024x1024");
-            return response()->json($test);
+
+            $url = $this->url + $searchEn + "/definitions";
+            $useCanonical = "?useCanonical=false";
+            $limitCount = "&limit=5";
+            $apiKey = "&api_key=" + $this->Wordnik_API_Key;
+            $re = $this->iCURL($url . $useCanonical . $limitCount . $apiKey, [], $header);
+
+            return response()->json($re);
         }
     }
 }
