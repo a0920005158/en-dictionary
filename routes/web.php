@@ -18,5 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Route::match(['get', 'post'], '/api/ai-conversation', [AIConversationController::class, 'sendMsg']);
+
 // Route::post( '/ai-conversation', [AIConversationController::class, 'sendMsg']);
 // Route::get('/search',[SearchWordController::class,'searchWord']);

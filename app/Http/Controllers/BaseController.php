@@ -87,23 +87,18 @@ class BaseController extends Controller
         return $result;
     }
 
-    public function chatGpt($word)
+    public function chatGpt($msg, $userId = "")
     {
-        $url = "https://api.openai.com/v1/completions";
+        $url = "https://api.openai.com/v1/chat/completions";
         $curl_h = curl_init($url);
 
         $arr = array(
-            "model" => "text-davinci-003",
-            // "prompt" => $word,
-            "prompt" => "The following is a conversation with an AI assistant." . $word . "\nAI:",
-            "temperature" => 0.5,
-            // "max_tokens" => strlen($word)
             "max_tokens" => 60,
-            "top_p" => 1.0,
-            "frequency_penalty" => 0.5,
-            "presence_penalty" => 0.0,
-            "stop" => [" Human:", " AI:"]
+            "model" => "gpt-3.5-turbo",
+            "messages" => $msg,
+            "user" => $userId
         );
+
         $jsonData = json_encode($arr);
 
         curl_setopt(
