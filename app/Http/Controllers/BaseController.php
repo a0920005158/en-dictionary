@@ -93,10 +93,44 @@ class BaseController extends Controller
         $curl_h = curl_init($url);
 
         $arr = array(
-            "max_tokens" => 60,
+            "max_tokens" => 150,
             "model" => "gpt-3.5-turbo",
             "messages" => $msg,
             "user" => $userId
+        );
+
+        $jsonData = json_encode($arr);
+
+        curl_setopt(
+            $curl_h,
+            CURLOPT_HTTPHEADER,
+            array(
+                'Content-Type: application/json',
+                'Authorization: Bearer ' . $this->API_KEY
+            )
+        );
+        curl_setopt($curl_h, CURLOPT_POSTFIELDS, $jsonData);
+        curl_setopt($curl_h, CURLOPT_RETURNTRANSFER, true);
+
+        $re = curl_exec($curl_h);
+
+        return json_decode($re, true);
+    }
+
+
+    public function chatGptSearch($search)
+    {
+        $url = "https://api.openai.com/v1/chat/completions";
+        $curl_h = curl_init($url);
+
+        $arr = array(
+            "model" => "text-davinci-003",
+            "prompt" => $search,
+            "temperature" => 0.5,
+            "max_tokens" => 200,
+            "top_p" => 1.0,
+            "frequency_penalty" => 0.5,
+            "presence_penalty" => 0.0,
         );
 
         $jsonData = json_encode($arr);

@@ -28,45 +28,23 @@ class AIConversationController extends BaseController
         $userId = $request->input("userId");
         $msgArr = [];
 
-        // $sss= $request->session()->get('msgRecord');
-        $test = $request->session()->get('test',"nonono");
-        // $msgRecordArr = $request->session()->pull('msgRecord', '');
+        $msgRecordArr = $request->session()->pull('msgRecord', '');
 
-        // echo "========<br>";
-        // print_r($msgRecordArr);
-        // echo "ssssssssssss<br>";
-        // print_r($sss);
-        // echo "test<br>";
-        // print_r($test);
-
-
-        // $request->session()->push('msgRecord', 'develop');
-        // $request->session()->push('msgRecord', 'staging');
-        // $request->session()->push('msgRecord', 'production');
-        $request->session()->put("test","test2222");
-        $test2 = $request->session()->get('test',"nonono");
-        print_r($test2);
-        $request->session()->save();
-        return response()->json($test);
-        // if ($msgRecordArr != '') {
-        //     echo 'bbb';
-        //     $recordLg = count($msgRecordArr);
-        //     if ($recordLg > 0) {
-        //         for ($i = 4; $i > 0; $i--) {
-        //             if ($recordLg - $i >= 0) {
-        //                 echo '====';
-        //                 $RR = explode(":%", $msgRecordArr[$recordLg - $i]);
-        //                 $msgArr[] = array(
-        //                     "role" => $RR[0],
-        //                     "content" => $RR[1]
-        //                 );
-        //                 $request->session()->push('msgRecord', $msgRecordArr[$recordLg - $i]);
-        //             }
-        //         }
-        //     }
-        // }else{
-        //     echo 'aaa';
-        // }
+        if ($msgRecordArr != '') {
+            $recordLg = count($msgRecordArr);
+            if ($recordLg > 0) {
+                for ($i = 3; $i > 0; $i--) {
+                    if ($recordLg - $i >= 0) {
+                        $RR = explode(":%", $msgRecordArr[$recordLg - $i]);
+                        $msgArr[] = array(
+                            "role" => $RR[0],
+                            "content" => $RR[1]
+                        );
+                        $request->session()->push('msgRecord', $msgRecordArr[$recordLg - $i]);
+                    }
+                }
+            }
+        }
 
         $msgArr[] = array(
             "role" => "user",
@@ -87,7 +65,6 @@ class AIConversationController extends BaseController
                 'msgRecord',
                 $assistantRole . ":%" . $assistantResponse
             );
-            // $result["session"] = $request->session()->get('msgRecord');
         }
 
         return response()->json($result);
