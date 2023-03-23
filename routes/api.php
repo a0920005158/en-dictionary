@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SearchWordController;
 use App\Http\Controllers\AIConversationController;
+use App\Http\Controllers\AITravelPlanController;
 use App\Http\Controllers\LoginController;
 
 /*
@@ -27,4 +28,5 @@ use App\Http\Controllers\LoginController;
 Route::match(['get', 'post'], '/search-word', [SearchWordController::class, 'searchWord']);
 // Route::match(['get', 'post'], '/ai-conversation', [AIConversationController::class, 'sendMsg']);
 Route::post( '/ai-conversation', [AIConversationController::class, 'sendMsg']);
+Route::post( '/travel-plan', [AITravelPlanController::class, 'plan']);
 Route::get('/login', [LoginController::class, 'AuthIdentity']);
