@@ -124,7 +124,7 @@ class BaseController extends Controller
 
         $arr = array(
             "model" => "text-davinci-003",
-            "prompt" => "hello",
+            "prompt" => $msg,
             "temperature" => 0,
             "max_tokens" => 4096,
         );
