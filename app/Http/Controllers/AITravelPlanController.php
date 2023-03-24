@@ -22,9 +22,9 @@ class AITravelPlanController extends BaseController
         $food = $request->input("food");
         $time = $request->input("time");
 
-        $txt = "扮演旅遊達人依下方景點、旅店、美食隨機挑選，產生" . $time . "行程。\r\n";
-        $txt .= "景點:".$attractions."。\r\n";
-        $txt .= "旅店:".$hotel."。\r\n";
+        $txt = "扮演旅遊達人從下資訊隨機產生" . $time . "行程。\r\n";
+        $txt .= "景點:".$attractions."。";
+        $txt .= "旅店:".$hotel."。";
         $txt .= "美食:".$food."。";
         $result = $this->chatGptEdits($txt);
 
