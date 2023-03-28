@@ -1,6 +1,7 @@
 {
     "private": true,
     "scripts": {
+        "start-local": "php artisan serve --host=localhost --port=8000",
         "start": "php artisan serve",
         "dev": "npm run development",
         "development": "mix",
