@@ -29,4 +29,5 @@ Route::match(['get', 'post'], '/search-word', [SearchWordController::class, 'sea
 // Route::match(['get', 'post'], '/ai-conversation', [AIConversationController::class, 'sendMsg']);
 Route::post( '/ai-conversation', [AIConversationController::class, 'sendMsg']);
 Route::post( '/travel-plan', [AITravelPlanController::class, 'plan']);
+Route::post( '/export-plan', [PlanHandleController::class, 'store']);
 Route::get('/login', [LoginController::class, 'AuthIdentity']);
