@@ -13,13 +13,13 @@ class CreateWordDictionaryTable extends Migration
      */
     public function up()
     {
-        Schema::create('word-dictionary', function (Blueprint $table) {
-            $table->id();
-            $table->string('en');
-            $table->string('cn');
-            $table->string('example');
-            $table->timestamps();
-        });
+        // Schema::create('word-dictionary', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('en');
+        //     $table->string('cn');
+        //     $table->string('example');
+        //     $table->timestamps();
+        // });
     }
 
     /**
