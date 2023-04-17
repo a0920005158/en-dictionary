@@ -15,7 +15,7 @@ class PlanRecord extends Migration
     {
         Schema::create('plan-record', function (Blueprint $table) {
             $table->id();
-            $table->string('token');
+            $table->string('email');
             $table->string('acc');
             $table->string('title');
             $table->text('context');

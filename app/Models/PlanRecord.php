@@ -13,6 +13,7 @@ class PlanRecord extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $table = 'plan-record';
     protected $primaryKey = 'id';
 
     /**
@@ -21,6 +22,7 @@ class PlanRecord extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'id',
         'acc',
         'title',
         'context',
@@ -33,7 +35,6 @@ class PlanRecord extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'id',
         'token',
     ];
 

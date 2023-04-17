@@ -6,6 +6,7 @@ use App\Http\Controllers\SearchWordController;
 use App\Http\Controllers\AIConversationController;
 use App\Http\Controllers\AITravelPlanController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PlanHandleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +26,12 @@ use App\Http\Controllers\LoginController;
 // Route::middleware('auth:api-user')->get('/search-word', [SearchWordController::class, 'searchWord']);
 // Route::middleware('auth:api-user')->get('/ai-coversation', [AIConversationController::class, 'sendMsg']);
 
+Route::get('/login', [LoginController::class, 'AuthIdentity']);
 Route::match(['get', 'post'], '/search-word', [SearchWordController::class, 'searchWord']);
-// Route::match(['get', 'post'], '/ai-conversation', [AIConversationController::class, 'sendMsg']);
 Route::post( '/ai-conversation', [AIConversationController::class, 'sendMsg']);
 Route::post( '/travel-plan', [AITravelPlanController::class, 'plan']);
-Route::post( '/export-plan', [PlanHandleController::class, 'store']);
-Route::get('/login', [LoginController::class, 'AuthIdentity']);
+Route::post( '/store-plan', [PlanHandleController::class, 'store']);
+Route::post( '/get-mem-plan', [PlanHandleController::class, 'getMemPlan']);
+Route::post( '/release-mem-plan', [PlanHandleController::class, 'releaseMemPlan']);
+Route::post( '/delete-mem-plan', [PlanHandleController::class, 'deleteMemPlan']);
+Route::post( '/get-all-plan', [PlanHandleController::class, 'getAllPlan']);
