@@ -13,20 +13,22 @@ class AITravelPlanController extends BaseController
         $this->validate($request, [
             'attractions' => 'required',
             // 'hotel' => 'required',
-            'food' => 'required',
+            // 'food' => 'required',
             'trans' => 'required',
             // 'time' => 'required|max:50',
         ]);
 
         $attractions = $request->input("attractions");
         // $hotel = $request->input("hotel");
-        $food = $request->input("food");
+        // $food = $request->input("food");
         $trans = $request->input("trans");
         // $time = $request->input("time");
 
-        $txt = "以下景點、美食依" . $trans . "方式路線規劃一日行程`。";
-        $txt .= "景點:" . $attractions . "。";
-        $txt .= "美食:" . $food . "。";
+        $txt = "以下地點依" . $trans . "方式路線規劃一日行程`。";
+        $txt .=  $attractions;
+        // $txt .= "景點:" . $attractions . "。";
+        // if(isset($food))
+        //     $txt .= "美食:" . $food . "。";
         // $txt = "以下資訊隨機產生" . $time . "行程。\r\n";
         // $txt .= "景點:".$attractions."。";
         // $txt .= "旅店:".$hotel."。";

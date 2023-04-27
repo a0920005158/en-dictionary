@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SearchWordController;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\AIConversationController;
 
 /*
@@ -17,6 +18,8 @@ use App\Http\Controllers\AIConversationController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::match(['get', 'post'], '/test', [TestController::class, 'test']);
 
 // Route::match(['get', 'post'], '/api/ai-conversation', [AIConversationController::class, 'sendMsg']);
 
